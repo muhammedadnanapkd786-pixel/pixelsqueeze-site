@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — PixelSqueeze</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1615; --surface:#12211f; --border:#22403a;
+    --text:#eef2ee; --muted:#7c9490; --accent:#c4f042;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--accent);color:#0b1615;}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 80px;}
+  nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:36px;margin-bottom:48px;border-bottom:1px solid var(--border);
+  }
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;text-decoration:none;color:var(--text);}
+  .brand span{color:var(--accent);}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a.active{color:var(--accent);}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:14px;
+  }
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,5vw,42px);margin:0 0 18px;}
+  p{color:#c7d3cf;line-height:1.7;font-size:15.5px;margin:0 0 16px;max-width:480px;}
+  .card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:14px;padding:24px;margin-top:32px;
+  }
+  .row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);font-size:14.5px;}
+  .row:last-child{border-bottom:none;}
+  .row span:first-child{color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;}
+  .row a{color:var(--accent);text-decoration:none;}
+  footer{margin-top:60px;color:var(--muted);font-size:12px;font-family:'IBM Plex Mono',monospace;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a href="index.html" class="brand">pixel<span>squeeze</span></a>
+    <div class="nav-links">
+      <a href="index.html">Compress</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+  </nav>
+
+  <div class="eyebrow">// get in touch</div>
+  <h1>Questions, bugs, ideas.</h1>
+  <p>PixelSqueeze is a small, independent tool. If something breaks, looks wrong on your device, or you've got a feature you'd like to see — reach out.</p>
+
+  <div class="card">
+    <div class="row"><span>Response time</span><span>Within a few days</span></div>
+  </div>
+
+  <footer>pixelsqueeze — compress once, ship light</footer>
+</div>
+</body>
+</html>

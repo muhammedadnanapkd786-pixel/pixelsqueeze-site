@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PixelSqueeze — Image Compressor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GS8LJPZ0DH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GS8LJPZ0DH');
+</script>
+<style>
+  :root{
+    --bg:#0b1615;
+    --surface:#12211f;
+    --surface-2:#182b28;
+    --border:#22403a;
+    --text:#eef2ee;
+    --muted:#7c9490;
+    --accent:#c4f042;
+    --accent-dim:#8fae2e;
+    --coral:#ff6b5e;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:#0b1615;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:56px 24px 80px;}
+
+  nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:36px;
+    margin-bottom:36px;
+    border-bottom:1px solid var(--border);
+  }
+  .brand{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    letter-spacing:-0.01em;
+    text-decoration:none;
+    color:var(--text);
+  }
+  .brand span{color:var(--accent);}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:14px;
+    transition:color .15s ease;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a.active{color:var(--accent);}
+
+  header{margin-bottom:48px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(36px,6vw,56px);
+    line-height:1.02;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .sub{
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.5;
+    max-width:480px;
+  }
+
+  .dropzone{
+    border:1.5px dashed var(--border);
+    border-radius:16px;
+    background:var(--surface);
+    padding:56px 24px;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color .2s ease, background .2s ease;
+    position:relative;
+  }
+  .dropzone.drag{
+    border-color:var(--accent);
+    background:var(--surface-2);
+  }
+  .dropzone input{display:none;}
+  .drop-icon{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--muted);
+    letter-spacing:.05em;
+  }
+  .drop-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:20px;
+    font-weight:600;
+    margin:10px 0 6px;
+  }
+  .drop-sub{color:var(--muted);font-size:14px;}
+
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin:32px 0 8px;
+    flex-wrap:wrap;
+  }
+  .control-group{display:flex;flex-direction:column;gap:8px;flex:1;min-width:200px;}
+  .control-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+  }
+  .control-label span.val{color:var(--accent);}
+  input[type=range]{
+    -webkit-appearance:none;
+    width:100%;
+    height:3px;
+    background:var(--border);
+    border-radius:2px;
+    outline:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--accent);
+    cursor:pointer;
+    border:2px solid var(--bg);
+  }
+  select{
+    background:var(--surface);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:8px 10px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+  }
+
+  .results{margin-top:36px;display:flex;flex-direction:column;gap:14px;}
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+  }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:14px;
+  }
+  .fname{
+    font-size:14px;
+    font-weight:500;
+    word-break:break-all;
+  }
+  .fname-sub{color:var(--muted);font-size:12px;margin-top:2px;}
+
+  .scale{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .scale .before{
+    color:var(--muted);
+    text-decoration:line-through;
+    font-size:15px;
+  }
+  .scale .arrow{color:var(--muted);font-size:14px;}
+  .scale .after{
+    color:var(--accent);
+    font-size:22px;
+    font-weight:600;
+  }
+  .pct-badge{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    background:rgba(196,240,66,0.12);
+    color:var(--accent);
+    padding:4px 9px;
+    border-radius:100px;
+    white-space:nowrap;
+  }
+
+  .bar-track{
+    height:8px;
+    background:var(--border);
+    border-radius:6px;
+    overflow:hidden;
+    margin-bottom:14px;
+  }
+  .bar-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--accent-dim),var(--accent));
+    border-radius:6px;
+    width:0%;
+    transition:width 1s cubic-bezier(.16,1,.3,1);
+  }
+
+  .card-actions{display:flex;gap:10px;align-items:center;justify-content:space-between;}
+  .status{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .status.working{color:var(--accent);}
+  .status.working::after{
+    content:'';
+    display:inline-block;
+    width:6px;height:6px;
+    background:var(--accent);
+    border-radius:50%;
+    margin-left:6px;
+    animation:pulse 1s infinite ease-in-out;
+  }
+  @keyframes pulse{0%,100%{opacity:.2;}50%{opacity:1;}}
+
+  button.dl{
+    background:var(--accent);
+    color:#0b1615;
+    border:none;
+    border-radius:8px;
+    padding:9px 16px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+    transition:transform .12s ease;
+  }
+  button.dl:hover{transform:translateY(-1px);}
+  button.dl:disabled{
+    background:var(--border);
+    color:var(--muted);
+    cursor:not-allowed;
+    transform:none;
+  }
+
+  .summary-bar{
+    display:none;
+    margin-top:28px;
+    padding:18px 20px;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:14px;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .summary-bar.show{display:flex;}
+  .summary-text{font-size:14px;color:var(--muted);}
+  .summary-text b{color:var(--accent);font-family:'IBM Plex Mono',monospace;}
+  .dl-all{
+    background:transparent;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    border-radius:8px;
+    padding:9px 16px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+  }
+
+  footer{
+    margin-top:60px;
+    color:var(--muted);
+    font-size:12px;
+    font-family:'IBM Plex Mono',monospace;
+    text-align:center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .bar-fill{transition:none;}
+    .status.working::after{animation:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <a href="index.html" class="brand">pixel<span>squeeze</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Compress</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="eyebrow">// client-side · nothing uploaded anywhere</div>
+    <h1>Make it <em>lighter</em>.</h1>
+    <p class="sub">Drop in your images. PixelSqueeze shrinks them right here in your browser — no server, no upload, no waiting on someone else's queue.</p>
+  </header>
+
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" accept="image/*" multiple>
+    <div class="drop-icon">[ drag &amp; drop ]</div>
+    <div class="drop-title">Drop images here, or click to browse</div>
+    <div class="drop-sub">JPG, PNG, WebP — any size, any number</div>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label class="control-label">Quality <span class="val" id="qualityVal">75%</span></label>
+      <input type="range" id="quality" min="10" max="95" value="75">
+    </div>
+    <div class="control-group">
+      <label class="control-label">Output format</label>
+      <select id="format">
+        <option value="auto">Keep original</option>
+        <option value="image/jpeg">JPG</option>
+        <option value="image/webp">WebP</option>
+        <option value="image/png">PNG</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Max width <span class="val" id="widthVal">No limit</span></label>
+      <input type="range" id="maxWidth" min="0" max="4000" step="100" value="0">
+    </div>
+  </div>
+
+  <div class="results" id="results"></div>
+
+  <div class="summary-bar" id="summaryBar">
+    <div class="summary-text">Total saved: <b id="totalSaved">0 KB</b> across <b id="totalCount">0</b> images</div>
+    <button class="dl-all" id="dlAll">Download all</button>
+  </div>
+
+  <footer>pixelsqueeze — compress once, ship light</footer>
+</div>
+
+<script>
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const results = document.getElementById('results');
+const qualitySlider = document.getElementById('quality');
+const qualityVal = document.getElementById('qualityVal');
+const formatSelect = document.getElementById('format');
+const maxWidthSlider = document.getElementById('maxWidth');
+const widthVal = document.getElementById('widthVal');
+const summaryBar = document.getElementById('summaryBar');
+const totalSaved = document.getElementById('totalSaved');
+const totalCount = document.getElementById('totalCount');
+const dlAll = document.getElementById('dlAll');
+
+let processed = []; // {name, blob, url}
+
+qualitySlider.addEventListener('input', () => {
+  qualityVal.textContent = qualitySlider.value + '%';
+});
+maxWidthSlider.addEventListener('input', () => {
+  widthVal.textContent = maxWidthSlider.value == 0 ? 'No limit' : maxWidthSlider.value + 'px';
+});
+
+dropzone.addEventListener('click', () => fileInput.click());
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('drag');
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', e => handleFiles(e.target.files));
+
+function formatBytes(bytes){
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/(1024*1024)).toFixed(2) + ' MB';
+}
+
+function handleFiles(files){
+  [...files].forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    createCard(file);
+  });
+}
+
+function createCard(file){
+  const card = document.createElement('div');
+  card.className = 'card';
+  const id = 'img_' + Math.random().toString(36).slice(2,9);
+  card.id = id;
+  card.innerHTML = `
+    <div class="card-top">
+      <div>
+        <div class="fname">${file.name}</div>
+        <div class="fname-sub">${file.type || 'image'}</div>
+      </div>
+      <div class="pct-badge" style="display:none">— %</div>
+    </div>
+    <div class="bar-track"><div class="bar-fill"></div></div>
+    <div class="card-actions">
+      <div class="status working">compressing</div>
+      <button class="dl" disabled>Download</button>
+    </div>
+  `;
+  results.prepend(card);
+  compressImage(file, card);
+}
+
+function compressImage(file, card){
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      let w = img.width, h = img.height;
+      const maxW = parseInt(maxWidthSlider.value);
+      if (maxW > 0 && w > maxW){
+        h = Math.round(h * (maxW / w));
+        w = maxW;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+
+      let outType = formatSelect.value;
+      if (outType === 'auto') outType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      const quality = outType === 'image/png' ? 1 : parseInt(qualitySlider.value) / 100;
+
+      canvas.toBlob(blob => {
+        if (!blob){
+          updateCardError(card);
+          return;
+        }
+        finishCard(card, file, blob);
+      }, outType, quality);
+    };
+    img.onerror = () => updateCardError(card);
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateCardError(card){
+  card.querySelector('.status').textContent = 'failed to process';
+  card.querySelector('.status').classList.remove('working');
+}
+
+function finishCard(card, file, blob){
+  const before = file.size;
+  const after = blob.size;
+  const saved = Math.max(0, before - after);
+  const pct = before > 0 ? Math.round((saved / before) * 100) : 0;
+  const url = URL.createObjectURL(blob);
+
+  card.querySelector('.card-top').innerHTML = `
+    <div>
+      <div class="fname">${file.name}</div>
+      <div class="fname-sub scale">
+        <span class="before">${formatBytes(before)}</span>
+        <span class="arrow">→</span>
+        <span class="after">${formatBytes(after)}</span>
+      </div>
+    </div>
+    <div class="pct-badge">${pct > 0 ? '-' + pct + '%' : 'no change'}</div>
+  `;
+  const fill = card.querySelector('.bar-fill');
+  requestAnimationFrame(() => {
+    fill.style.width = Math.max(4, 100 - pct) + '%';
+  });
+
+  const status = card.querySelector('.status');
+  status.textContent = 'ready';
+  status.classList.remove('working');
+
+  const btn = card.querySelector('.dl');
+  btn.disabled = false;
+  btn.textContent = 'Download';
+  btn.addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = url;
+    const ext = blob.type.split('/')[1].replace('jpeg','jpg');
+    const base = file.name.replace(/\.[^.]+$/, '');
+    a.download = `${base}-compressed.${ext}`;
+    a.click();
+  });
+
+  processed.push({name: file.name, blob, url, saved});
+  updateSummary();
+}
+
+function updateSummary(){
+  if (processed.length === 0) return;
+  summaryBar.classList.add('show');
+  totalCount.textContent = processed.length;
+  const savedBytes = processed.reduce((sum, p) => sum + p.saved, 0);
+  totalSaved.textContent = formatBytes(savedBytes);
+}
+
+dlAll.addEventListener('click', () => {
+  processed.forEach(p => {
+    const a = document.createElement('a');
+    a.href = p.url;
+    const ext = p.blob.type.split('/')[1].replace('jpeg','jpg');
+    const base = p.name.replace(/\.[^.]+$/, '');
+    a.download = `${base}-compressed.${ext}`;
+    a.click();
+  });
+});
+</script>
+</body>
+</html>

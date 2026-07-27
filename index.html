@@ -325,6 +325,36 @@
     .bar-fill{transition:none;}
     .status.working::after{animation:none;}
   }
+   .faq{
+  margin-top:60px;
+}
+
+.faq h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:32px;
+  margin-bottom:24px;
+}
+
+.faq-item{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:16px;
+}
+
+.faq-item h3{
+  margin:0 0 10px;
+  color:var(--accent);
+  font-size:18px;
+}
+
+.faq-item p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.6;
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -394,6 +424,35 @@
     <div class="summary-text">Total saved: <b id="totalSaved">0 KB</b> across <b id="totalCount">0</b> images</div>
     <button class="dl-all" id="dlAll">Download all</button>
   </div>
+
+  <section class="faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <h3>What is PixelSqueeze?</h3>
+    <p>PixelSqueeze is a free online image compressor that reduces JPG, PNG and WebP image sizes directly in your browser.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Is PixelSqueeze free?</h3>
+    <p>Yes. PixelSqueeze is completely free to use with no hidden charges.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Are my images uploaded?</h3>
+    <p>No. Your images stay on your device because all compression happens in your browser.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Which formats are supported?</h3>
+    <p>PixelSqueeze supports JPG, PNG and WebP images.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Does image compression reduce quality?</h3>
+    <p>You can adjust the compression quality to balance image size and visual quality.</p>
+  </div>
+</section>
 
   <footer>pixelsqueeze — compress once, ship light</footer>
 </div>

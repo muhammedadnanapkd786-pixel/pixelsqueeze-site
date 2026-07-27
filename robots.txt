@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pixelsqueeze.pages.dev/sitemap.xml

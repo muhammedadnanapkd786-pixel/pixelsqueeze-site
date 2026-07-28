@@ -321,6 +321,40 @@
     .bar-fill{transition:none;}
     .status.working::after{animation:none;}
   }
+  .why{
+  margin:60px 0;
+}
+
+.why h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:32px;
+  margin-bottom:24px;
+}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.why-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+}
+
+.why-card h3{
+  margin:0 0 12px;
+  color:var(--accent);
+  font-size:18px;
+}
+
+.why-card p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.6;
+}
    .faq{
   margin-top:60px;
 }
@@ -457,7 +491,35 @@ footer a:hover{
     <button class="dl-all" id="dlAll">Download all</button>
   </div>
 
+
+  <section class="why">
+  <h2>Why PixelSqueeze?</h2>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <h3>🔒 100% Private</h3>
+      <p>Your images never leave your device. Everything happens inside your browser.</p>
+    </div>
+
+    <div class="why-card">
+      <h3>⚡ Fast Compression</h3>
+      <p>Compress JPG, PNG and WebP images in seconds with no waiting.</p>
+    </div>
+
+    <div class="why-card">
+      <h3>🆓 Completely Free</h3>
+      <p>No registration, subscriptions or hidden costs.</p>
+    </div>
+
+    <div class="why-card">
+      <h3>💻 Works Everywhere</h3>
+      <p>Compatible with modern desktop and mobile browsers.</p>
+    </div>
+  </div>
+</section>
+
   <section class="faq">
+
   <h2>Frequently Asked Questions</h2>
 
   <div class="faq-item">

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <title>JPG to WebP Converter — Free & Private | PixelSqueeze</title>
 <meta name="description" content="Convert JPG or JPEG images to WebP for free, right in your browser. No uploads, no servers, no watermarks. Drag, drop, and download — batch conversion supported.">
 <link rel="canonical" href="https://pixelsqueeze.com/jpg-to-webp.html">
@@ -135,28 +136,49 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding-bottom:36px;
+    gap:16px;
+    padding-bottom:24px;
     margin-bottom:36px;
     border-bottom:1px solid var(--border);
   }
   .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
     font-size:17px;
     letter-spacing:-0.01em;
     text-decoration:none;
     color:var(--text);
+    flex-shrink:0;
   }
   .brand span{color:var(--accent);}
-  .nav-links{display:flex;gap:28px;}
+  .logo-img{
+    height:36px;
+    width:36px;
+    border-radius:9px;
+    display:block;
+    flex-shrink:0;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .nav-links::-webkit-scrollbar{display:none;}
   .nav-links a{
     color:var(--muted);
     text-decoration:none;
     font-size:14px;
+    white-space:nowrap;
+    flex-shrink:0;
     transition:color .15s ease;
   }
   .nav-links a:hover{color:var(--text);}
-  .nav-links a.active{color:var(--accent);}
+  .nav-links a.active{color:var(--accent);font-weight:600;}
 
   header{margin-bottom:48px;}
   .eyebrow{
@@ -430,13 +452,29 @@
     margin-bottom:4px;
   }
   .tool-card .t-sub{color:var(--muted);font-size:13px;}
+
+  @media (max-width:640px){
+    nav{
+      flex-wrap:wrap;
+      row-gap:14px;
+      padding-bottom:18px;
+      margin-bottom:28px;
+    }
+    .brand{font-size:16px;}
+    .logo-img{height:32px;width:32px;}
+    .nav-links{
+      width:100%;
+      gap:18px;
+      justify-content:flex-start;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <nav>
-    <a href="index.html" class="brand">pixel<span>squeeze</span></a>
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="PixelSqueeze logo" class="logo-img" width="36" height="36">pixel<span>squeeze</span></a>
     <div class="nav-links">
       <a href="index.html">Compress</a>
       <a href="jpg-to-png.html">JPG to PNG</a>

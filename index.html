@@ -3,9 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PixelSqueeze — Image Compressor</title>
+<title>Free Online Image Compressor — Shrink JPG, PNG & WebP | PixelSqueeze</title>
+<meta name="description" content="Compress JPG, PNG, and WebP images for free, right in your browser. No uploads, no servers, no watermarks. Adjustable quality, resizing, and batch compression.">
+<link rel="canonical" href="https://pixelsqueeze.com/index.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Online Image Compressor — Shrink JPG, PNG & WebP | PixelSqueeze">
+<meta property="og:description" content="Compress JPG, PNG, and WebP images for free, right in your browser. No uploads, no servers, no watermarks. Adjustable quality, resizing, and batch compression.">
+<meta property="og:url" content="https://pixelsqueeze.com/index.html">
+<meta property="og:site_name" content="PixelSqueeze">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free Online Image Compressor — Shrink JPG, PNG & WebP | PixelSqueeze">
+<meta name="twitter:description" content="Compress JPG, PNG, and WebP images for free, right in your browser. No uploads, no servers, no watermarks. Adjustable quality, resizing, and batch compression.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- WebSite Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "PixelSqueeze",
+  "url": "https://pixelsqueeze.com/index.html",
+  "description": "Compress JPG, PNG, and WebP images for free, right in your browser. No uploads, no servers, no watermarks. Adjustable quality, resizing, and batch compression."
+}
+</script>
+
+<!-- SoftwareApplication Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PixelSqueeze Image Compressor",
+  "url": "https://pixelsqueeze.com/index.html",
+  "description": "Compress JPG, PNG, and WebP images for free, right in your browser. No uploads, no servers, no watermarks. Adjustable quality, resizing, and batch compression.",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (runs in any modern web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is PixelSqueeze really free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. PixelSqueeze is completely free, with no limits on how many images you compress."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every compression happens locally in your browser using the Canvas API. Your files never leave your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which image formats does PixelSqueeze support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PixelSqueeze compresses JPG, PNG, and WebP images, and can also convert between these formats or resize images."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compress multiple images at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can drag and drop or select multiple images, and each one is compressed with the same quality settings and available to download individually or all at once."
+      }
+    }
+  ]
+}
+</script>
 <style>
   :root{
     --bg:#0b1615;
@@ -329,6 +416,26 @@
     margin-bottom:4px;
   }
   .tool-card .t-sub{color:var(--muted);font-size:13px;}
+
+  .faq{margin-top:64px;}
+  .faq h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 20px;
+  }
+  .faq-item{
+    border-top:1px solid var(--border);
+    padding:18px 0;
+  }
+  .faq-item:last-child{border-bottom:1px solid var(--border);}
+  .faq-q{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    margin:0 0 8px;
+  }
+  .faq-a{color:var(--muted);font-size:14.5px;line-height:1.6;margin:0;}
 </style>
 </head>
 <body>
@@ -417,6 +524,26 @@
         <div class="t-title">Image Resizer</div>
         <div class="t-sub">Resize JPG, PNG, or WebP images by width, height, or percentage.</div>
       </a>
+    </div>
+  </div>
+
+  <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <p class="faq-q">Is PixelSqueeze really free to use?</p>
+      <p class="faq-a">Yes. PixelSqueeze is completely free, with no limits on how many images you compress.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Are my images uploaded to a server?</p>
+      <p class="faq-a">No. Every compression happens locally in your browser using the Canvas API. Your files never leave your device.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Which image formats does PixelSqueeze support?</p>
+      <p class="faq-a">PixelSqueeze compresses JPG, PNG, and WebP images, and can also convert between these formats or resize images.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can I compress multiple images at once?</p>
+      <p class="faq-a">Yes. You can drag and drop or select multiple images, and each one is compressed with the same quality settings and available to download individually or all at once.</p>
     </div>
   </div>
 
